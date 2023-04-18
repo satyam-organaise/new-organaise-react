@@ -15,14 +15,15 @@ import ContentModels from '../../pages/ContentModels';
 import { useLocation } from 'react-router-dom';
 import { ChatState } from '../../Context/ChatProvider';
 import { useMutation } from 'react-query';
-import { fetchAllChatSingleUserOrGroup, fetchMessagesV1, sendV1Message } 
-from '../../api/InternalApi/OurDevApi';
+import { fetchAllChatSingleUserOrGroup, fetchMessagesV1, sendV1Message }
+    from '../../api/InternalApi/OurDevApi';
 import { getSender } from '../../utils/chatLogic';
 import io from "socket.io-client";
 
 import ListModal from '../Chat/ListModal';
 
-const ENDPOINT = "https://devorganaise.com";
+const ENDPOINT = "https://devorganaise.com"
+//"https://devorganaise.com";
 //"https://devorganaise.com/api"
 //"http://13.57.89.208:8000"
 //"http://localhost:8000"
@@ -122,7 +123,7 @@ const NewMessageGrid = ({ selectedChannel }) => {
         firstBoxMessage: { height: "80vh", backgroundColor: "#ffffff", marginTop: "0px" },
         groupNameBox: {
             position: "sticky", top: "65px", width: "100%", height: "50px", zIndex: "100",
-            background: " #FFFFFF", boxSizing: "border-box", 
+            background: " #FFFFFF", boxSizing: "border-box",
             borderBottom: "1px solid #F1F1F1"
         },
         avatarCss: { width: "25px", height: "25px" },
@@ -259,7 +260,6 @@ const NewMessageGrid = ({ selectedChannel }) => {
                 console.log("send message and recove message test", [...currentChats, newMessageRecived]);
                 setCurrentChats([...currentChats, newMessageRecived]);
                 //setMessages([...messages, newMessageRecived]);
-
             }
         })
     })
@@ -351,21 +351,21 @@ const NewMessageGrid = ({ selectedChannel }) => {
                         </Box>
 
 
-                       {
-                        (selectChatV1?.isGroupChat==='true'||selectChatV1?.isGroupChat===true)&&<Box display={'flex'} alignItems={'center'} >
-                        <Button
-                            sx={{ ...cssStyle.listofPeopeBtn, marginRight: "10px" }}
-                            variant="outlined"
-                            size="small"
-                            onClick={() => modelOpens()}>
-                            Add Member
-                        </Button>
-                        {/* <Button sx={cssStyle.listofPeopeBtn} variant="contained" size="small">
+                        {
+                            (selectChatV1?.isGroupChat === 'true' || selectChatV1?.isGroupChat === true) && <Box display={'flex'} alignItems={'center'} >
+                                <Button
+                                    sx={{ ...cssStyle.listofPeopeBtn, marginRight: "10px" }}
+                                    variant="outlined"
+                                    size="small"
+                                    onClick={() => modelOpens()}>
+                                    Add Member
+                                </Button>
+                                {/* <Button sx={cssStyle.listofPeopeBtn} variant="contained" size="small">
                             List Of People
                         </Button> */}
-                        <ListModal buttonStyle={cssStyle.listofPeopeBtn} addMemberFunction={modelOpens}/>
-                    </Box>
-                       } 
+                                <ListModal buttonStyle={cssStyle.listofPeopeBtn} addMemberFunction={modelOpens} />
+                            </Box>
+                        }
                     </>
                 }
 
@@ -455,11 +455,13 @@ const NewMessageGrid = ({ selectedChannel }) => {
                             */
                     }
 
-                    {(currentChats.length > 0&&selectChatV1) &&
+                    {(currentChats.length > 0 && selectChatV1) &&
                         <>
                             {currentChats?.map((mes, index) => {
-                                if (mes?.sender?._id === selectChatV1?.users[0]?._id&&selectChatV1.isGroupChat!==true) {
-                                    return <Grid
+
+                                if (mes?.sender?._id === selectChatV1?.users[0]?._id && selectChatV1.isGroupChat !== true) {
+
+                                  return <Grid
                                         id="rec_mess_con_grid"
                                         sx={{
                                             marginTop: "0px", width: "100%", marginLeft: "0px",

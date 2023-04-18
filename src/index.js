@@ -25,6 +25,7 @@ const queryClient = new QueryClient({
 
 // if (process.env.NODE_ENV === 'development') {
 axios.defaults.baseURL = "https://devorganaise.com/api/";
+//"http://localhost:3010/api"
 // } else if (process.env.NODE_ENV === 'production') {
 //   axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
 // }
