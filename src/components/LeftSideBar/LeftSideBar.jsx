@@ -53,7 +53,6 @@ import oLogo from "../../assets/svg/oLogo.svg"
 import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import LogOutModal from '../Chat/LogOutModal';
-import { clearLocalStorage } from '../../utils/validation';
 
 const drawerWidth = '200px';
 
@@ -62,9 +61,8 @@ const openedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration['20000'],
-    }),
+    }),  
     overflowX: 'hidden',
-    // marginLeft: '5rem',
     borderLeft: '2px solid  rgba(0, 0, 0, 0.06)',
     [theme.breakpoints.up('xs')]: {
         marginLeft: '3rem',
@@ -210,7 +208,10 @@ const LeftSideBar = (props) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     const [activePage, setActivePage] = useState("HomePage");
-    const [activeChatId, setActiveChatId] = useState()
+    const [activeChatId, setActiveChatId] = useState("")
+
+    const [showGroups,setShowGroups]=useState(true);
+    const [showInbox,setShowInbox]=useState(true);
 
     //////new model  open when click on the left side bar options and some others options like add folder and add teammate and so more
     const [openNewModel, setOpenNewModel] = useState(false);
@@ -563,7 +564,7 @@ const LeftSideBar = (props) => {
                         >
                             <ChatTwoToneIcon fontSize='small' />
                         </Button>
-                        <Typography sx={{ color: location.pathname.split(['/'])[1] === "chat" ? "#448DF0" : "#646464", fontSize: '13px' }}>Chat</Typography>
+                        <Typography sx={{ color: location.pathname.split(['/'])[1] === "chat" ? "#448DF0" : "#646464", fontSize: '14px' }}>Chat</Typography>
                     </Box>
 
 
@@ -575,7 +576,7 @@ const LeftSideBar = (props) => {
                         >
                             <ArticleOutlinedIcon fontSize='small' />
                         </Button>
-                        <Typography sx={{ color: location.pathname.split(['/'])[1] === "files" ? "#448DF0" : "#646464", fontSize: '13px' }}>Files</Typography>
+                        <Typography sx={{ color: location.pathname.split(['/'])[1] === "files" ? "#448DF0" : "#646464", fontSize: '14px' }}>Files</Typography>
                     </Box>
 
                     {/* <Box bgcolor={'white'} height={'5rem'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
@@ -598,7 +599,7 @@ const LeftSideBar = (props) => {
                     open={open}
                     position='relative'
                 >   
-                    <Box position={'absolute'} right={'0%'} bottom={'20%'}>
+                    <Box position={'absolute'} right={'0%'} bottom={'20%'} zIndex={50}>
                         {
                             open ? <ChevronLeftIcon sx={{ fontSize: "1.5rem", bgcolor: 'whitesmoke', boxShadow: '4px 0px 18px rgba(0, 0, 0, 0.06)', border: '1px solid rgba(0, 0, 0, 0.4)', color: 'gray', borderRadius: "50%"  }} onClick={() => handleDrawerClose()} /> : (
                                 <ChevronRightIcon sx={{ fontSize: "1.5rem", bgcolor: 'whitesmoke', boxShadow: '4px 0px 18px rgba(0, 0, 0, 0.06)', border: '1px solid rgba(0, 0, 0, 0.4)', color: 'gray', borderRadius: "50%" }} onClick={handleDrawerOpen} />
@@ -675,7 +676,7 @@ const LeftSideBar = (props) => {
                             location.pathname.split(['/'])[1] === "chat" && (
                                 <>
                                     <Box id="channel_box">
-                                        <Box sx={{ paddingLeft: {sm:'10px',md:"25px"}, paddingRight: {sm:'10px',md:"25px"} }}>
+                                        <Box sx={{ paddingLeft: {sm:'10px',md:"25px"}, paddingRight: {sm:'10px',md:"25px"} }} onClick={()=>{setShowGroups(!showGroups)}}>
                                             <Button
                                                 id="channel-create-button"
                                                 aria-controls={open ? 'basic-menu' : undefined}
@@ -691,13 +692,13 @@ const LeftSideBar = (props) => {
                                                 }}
                                                 endIcon={<KeyboardArrowDownIcon sx={{ position: "absolute", right: "10px", top: "8px" }} />}
                                             >
-                                                <GroupAddIcon sx={{ fontSize: "18px", marginRight: "8px" }} />
+                                                <GroupAddIcon sx={{ fontSize: "20px", marginRight: "8px" }} />
                                                 <span style={{ fontSize: "13px", textTransform: "capitalize", paddingTop: "2px", }}>
                                                     Groups
                                                 </span>
                                             </Button>
                                         </Box>
-                                        <Box>
+                                        {showGroups&&<Box>
                                             <List sx={{ padding: "0px" }} >
                                                 {/* <ListItem sx={{ paddingTop: "0px", paddingBottom: "0px", paddingLeft: "60px" }}>
                                     <ListItemText
@@ -720,10 +721,11 @@ const LeftSideBar = (props) => {
 
                                                 {
                                                     //channelList.length !== 0 && channelList.map((d) =>
-                                                    chats.length !== 0 && chats.map((d, index) =>
+                                                    chats.length !== 0 && chats?.map((d, index) =>
+                                                    
                                                         <ListItem
                                                             key={index}
-                                                            sx={{ paddingTop: "2px", paddingBottom: "0px", paddingLeft: {sm:'25px',md:'40px',xl:"60px"}, cursor: "pointer" }}
+                                                            sx={{ paddingTop: "2px", paddingBottom: "0px", paddingLeft: {sm:'25px',md:'40px',xl:"42px"}, cursor: "pointer" }}
                                                             // onClick={() =>
                                                             //     (location.pathname === "/chat" ? InanotherPage("1", d) : InanotherPage("2", d);setActiveChatId(d._id);setActivePage("groups");)
                                                             // }
@@ -731,7 +733,7 @@ const LeftSideBar = (props) => {
                                                             onClick={() => { location.pathname === "/chat" ? InanotherPage("1", d) : InanotherPage("2", d); setActiveChatId(d?._id); setActivePage("groups") }
                                                             }
                                                         >
-                                                            <ListItemText
+                                                           <ListItemText
                                                                 primary={
                                                                     //    d.Name.charAt(0).toUpperCase() + d.Name.slice(1)
                                                                     Object.keys(d).length > 0 &&
@@ -748,7 +750,7 @@ const LeftSideBar = (props) => {
                                                 <ListItem
                                                     sx={{
                                                         paddingTop: "0px", paddingBottom: "0px",
-                                                        paddingLeft: {sm:'22px',md:'38px',xl:"58px"}, cursor: "pointer"
+                                                        paddingLeft: {sm:'22px',md:'38px',xl:"42px"}, cursor: "pointer"
                                                     }}
                                                     onClick={() => modelOpens()}
                                                 >
@@ -766,10 +768,13 @@ const LeftSideBar = (props) => {
                                                     />
                                                 </ListItem>
                                             </List>
-                                        </Box>
+                                        </Box>}
                                     </Box>
+
+
+
                                     <Box id="single_user_box">
-                                        <Box sx={{ paddingLeft:{sm:'10px',md:"25px"} , paddingRight:{sm:'10px',md:"25px" } }}>
+                                        <Box sx={{marginTop:'.5rem' , paddingLeft:{sm:'10px',md:"25px"} , paddingRight:{sm:'10px',md:"25px" } }} onClick={()=>setShowInbox(!showInbox)}>
                                             <Button
                                                 id="single-user-inbox-create-button"
                                                 aria-controls={open ? 'basic-menu' : undefined}
@@ -785,19 +790,20 @@ const LeftSideBar = (props) => {
                                                 }}
                                                 endIcon={<KeyboardArrowDownIcon sx={{ position: "absolute", right: "10px", top: "8px" }} />}
                                             >
-                                                <GroupAddIcon sx={{ fontSize: "18px", marginRight: "8px" }} />
+                                                <GroupAddIcon sx={{ fontSize: "20px", marginRight: "8px" }} />
                                                 <span style={{ fontSize: "13px", textTransform: "capitalize", paddingTop: "2px", }}>
                                                     Inbox
                                                 </span>
                                             </Button>
                                         </Box>
-                                        <Box>
+
+                                        {showInbox&&<Box>
                                             <List sx={{ padding: "0px" }} >
                                                 {chats.length !== 0 && chats.map((d, index) =>
 
                                                     <ListItem
                                                         key={index}
-                                                        sx={{ paddingTop: "0px", paddingBottom: "0px", paddingLeft: {sm:'25px',md:"40px",xl:'60px'}, cursor: "pointer" }}
+                                                        sx={{ paddingTop: "0px", paddingBottom: "0px", paddingLeft: {sm:'25px',md:"40px",xl:'42px'}, cursor: "pointer" }}
                                                         onClick={() => { location.pathname === "/chat" ? InanotherPage("1", d) : InanotherPage("2", d); setActiveChatId(d?._id); setActivePage("inbox") }
                                                         }
                                                     >
@@ -814,8 +820,8 @@ const LeftSideBar = (props) => {
 
                                                         <ListItemText
                                                             primary={
-                                                                Object.keys(d).length > 0 &&
-                                                                (!d?.isGroupChat && getSender(user, d.users))
+                                                                Object.keys(d).length > 0 && 
+                                                                ((!d?.isGroupChat && getSender(user, d.users)).length<11?(!d?.isGroupChat && getSender(user, d.users)):(!d?.isGroupChat && getSender(user, d.users).slice(0,10)+" .."))
                                                             }
                                                             sx={{
                                                                 opacity: open ? 1 : 0, marginTop: "1px",
@@ -828,7 +834,7 @@ const LeftSideBar = (props) => {
                                                 <ListItem
                                                     sx={{
                                                         paddingTop: "0px", paddingBottom: "0px",
-                                                        paddingLeft: {sm:'22px',md:'38px',xl:"58px"}, cursor: "pointer"
+                                                        paddingLeft: {sm:'22px',md:'38px',xl:"42px"}, cursor: "pointer"
                                                     }}
                                                     onClick={() => singleMessTeamMemberModel()}
                                                 >
@@ -846,7 +852,7 @@ const LeftSideBar = (props) => {
                                                     />
                                                 </ListItem>
                                             </List>
-                                        </Box>
+                                        </Box>}
                                     </Box>
                                 </>
                             )
@@ -923,7 +929,7 @@ const LeftSideBar = (props) => {
                                         >
                                             <FolderOutlinedIcon sx={{ fontSize: "18px", marginRight: "8px" }} />
                                             <span style={{ fontSize: "13px", textTransform: "capitalize", paddingTop: "2px" }}>
-                                                Create Folders
+                                                All Folders
                                             </span>
                                         </Button>
                                     </Box>
@@ -983,7 +989,7 @@ const LeftSideBar = (props) => {
                         }
 
 
-                        <Box id="logout_box" sx={{ position: "absolute", bottom: "10px", width: "100%", borderTop: "1px solid #CFCFCF", paddingTop: {sm:'8px',md:"20px"} }} mt={1}>
+                        <Box id="logout_box" sx={{ position: "absolute", bottom: "10px", width: "100%", borderTop: "1px solid #CFCFCF", paddingTop: {sm:'8px',md:"10px"},background:"white" }} mt={1}>
                             <Box sx={{ paddingLeft: "25px", paddingRight: "25px" }}>
                                 {/* <Button
                                 id="logout-button"

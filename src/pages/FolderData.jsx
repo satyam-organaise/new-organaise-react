@@ -297,7 +297,6 @@ const FolderData = () => {
                                                 sx={{
                                                     fontSize: '80px',
                                                     color: colorsCode[d.folderName.slice(0,1).toLowerCase()]||"red"
-                                                    //selectRandomColor()
                                                     ,
                                                     cursor: "pointer"
                                                 }}

@@ -42,7 +42,21 @@ const ContentModels = ({
     const navigate = useNavigate();
     const [fullWidth, setFullWidth] = React.useState(true);
     const [maxWidth, setMaxWidth] = React.useState('xs');
+    const [allUsersList,setAllUsersList]=useState({})
 
+    useEffect(()=>{
+        const list=selectChatV1.users;
+        const userIdArr=list.map((item)=>{
+            return item._id
+        })
+        const idKeyObj={}
+        for(let val of userIdArr)
+        {
+            idKeyObj[val]=true
+        }
+
+        setAllUsersList(idKeyObj)
+    },[])
     ////// use conetext use here
     const { user, setUser, selectChatV1, setSelectedChatV1, currentChats, setCurrentChats, chats, setChats } = ChatState();
 
@@ -412,11 +426,22 @@ const ContentModels = ({
     const [debouncedSearchMember] = useDebounce(srcMemberText, 500);
     const [listNewMembers, setNewMembersList] = useState([]);
     const [selectSrcMember, setSelectSrcMem] = useState(null);
+    
     const searchMemberv1 = async (srcItem) => {
         try {
             const response = await MemberSearchV1({ search: srcItem });
+            
+            const filterUsers=response.filter((item)=>{
+                if(allUsersList[item._id])
+                {
+                    return false
+                }else{
+                    return true
+                }
+            })
+
             if (response.length > 0) {
-                setNewMembersList(response);
+                setNewMembersList(filterUsers);
             }
         } catch (error) {
             console.log(error.response);

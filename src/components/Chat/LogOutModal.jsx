@@ -13,8 +13,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  // border: '2px solid #000',
+  boxShadow: 12,
   padding:'2rem 2rem',
   borderRadius:"6px"
 };

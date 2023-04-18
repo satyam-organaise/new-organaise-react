@@ -86,8 +86,8 @@ export const SignupPage = () => {
         const userDataObj = {
             "email": emailAddress,
             "password": password,
-            "family_name": firstName,
-            "given_name": lastName
+            "given_name": firstName,
+            "family_name": lastName,
         }
 
 
