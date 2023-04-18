@@ -130,11 +130,11 @@ const NewMessageGrid = ({ selectedChannel }) => {
         timeRecMess: { fontSize: "10px", lineHeight: "25px", paddingLeft: "5px" },
         recRealMess: {
             paddingRight: "30px", paddingLeft: "10px", paddingTop: "10px", paddingBottom: "10px",
-            fontSize: "12px", lineHeight: "15px",  color: "#323232", background: " #F8F8F8", borderRadius: "0px 10px 10px 10px"
+            fontSize: "14px", lineHeight: "15px",  color: "#323232", background: " #F8F8F8", borderRadius: "0px 10px 10px 10px"
         },
         sendRealMess: {
             paddingRight: "10px", paddingLeft: "10px", paddingTop: "10px", paddingBottom: "10px",
-            fontSize: "12px", lineHeight: "15px",background: " #ECF4FF", color: "#323232", borderRadius: "10px 0px 10px 10px",
+            fontSize: "14px", lineHeight: "15px",background: " #ECF4FF", color: "#323232", borderRadius: "10px 0px 10px 10px",
         },
         sendMessInput: {
             "& input": {
@@ -330,7 +330,7 @@ const NewMessageGrid = ({ selectedChannel }) => {
 
     return (
         <>
-            <Box container py="13px" px={"25px"} boxSizing={"border-box"} sx={cssStyle.groupNameBox} display="flex" justifyContent={"space-between"}>
+            <Box container py="13px" px={"25px"} boxSizing={"border-box"} sx={cssStyle.groupNameBox} display="flex" justifyContent={"space-between"} >
                 {
                     //Object.keys(ActiveChannel).length > 3 &&
                     //Object.keys(MyActiveChat).lenght > 0 &&
@@ -463,7 +463,7 @@ const NewMessageGrid = ({ selectedChannel }) => {
                                         id="rec_mess_con_grid"
                                         sx={{
                                             marginTop: "0px", width: "100%", marginLeft: "0px",
-                                            boxSizing: "borderBox",
+                                            boxSizing: "borderBox"
                                         }}
                                         container
                                         spacing={5}
@@ -542,7 +542,7 @@ const NewMessageGrid = ({ selectedChannel }) => {
                         </>}
 
                 </Box>
-                <Box position={'absolute'} sx={{ width: "100%", bottom: "0px", backgroundColor: "#ffffff" }} py={"10px"} container px={"25px"}>
+                <Box position={'absolute'} sx={{ width: "100%", bottom: "3%", backgroundColor: "#ffffff" }} py={"10px"} container px={"25px"}>
                     {isTyping ? <Box sx={{ fontSize: "15px", marginLeft: "10px" }}>Typing...</Box> : <Box></Box>}
                     <Box container
                         sx={{

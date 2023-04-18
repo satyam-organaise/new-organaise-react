@@ -16,8 +16,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  // border: '2px solid #000',
+  boxShadow: 12,
   padding:'2rem 2rem',
   borderRadius:"6px"
 };
@@ -55,7 +55,6 @@ const DeleteModal = ({handleDelete,value,pageName,closeParentModal,toggleDeleteM
       try {
           const response = await fetchAllChatSingleUserOrGroup();
           if (response) {
-              console.log(response,"fetchhhhhhhh")
               setChats(response);
               setSelectedChatV1(response)
               // setLoggedUser(localStorage.getItem("userInfo"));
@@ -87,7 +86,7 @@ const DeleteModal = ({handleDelete,value,pageName,closeParentModal,toggleDeleteM
           aria-describedby="modal-modal-description"
         >
             
-          <Box sx={{...style, width: {xs:'100%',sm:350,md:520}, }}>
+          <Box sx={{...style, width: {xs:'90%',sm:350,md:520}, }}>
           
        
             
